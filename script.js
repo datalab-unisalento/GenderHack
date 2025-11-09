@@ -79,7 +79,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe cards and sections for animation
-document.querySelectorAll('.objective-card, .info-card, .output-card, .prize-category, .mention-card, .organizer-card, .rule-card, .contact-item').forEach(element => {
+document.querySelectorAll('.objective-card, .info-card, .output-card, .prize-category, .mention-card, .organizer-card, .category-detail-card, .rule-card, .contact-item').forEach(element => {
     element.style.opacity = '0';
     element.style.transform = 'translateY(20px)';
     element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
