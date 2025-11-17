@@ -487,13 +487,13 @@ body {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    padding-left: 80px;
+    padding-left: 35px;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 20px;
+    left: 10px;
     top: 0;
     bottom: 0;
     width: 3px;
@@ -530,6 +530,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    padding-left: 30px;
 }
 
 .timeline-content {
@@ -1467,19 +1468,19 @@ body {
     }
 
     .timeline {
-        padding-left: 70px;
+        padding-left: 50px;
     }
 
     .timeline::before {
-        left: 15px;
+        left: 20px;
     }
 
     .timeline-item::before {
-        left: -52px;
+        left: -37px;
     }
 
     .timeline-item.highlight::before {
-        left: -54px;
+        left: -39px;
     }
 
     .criteria-item {
@@ -1543,6 +1544,11 @@ body {
 
     .timeline-date {
         font-size: 1rem;
+        margin-left: 20px;
+    }
+
+    .timeline-content {
+        margin-left: 20px;
     }
 
     .criteria-score {
