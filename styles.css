@@ -1125,28 +1125,16 @@ body {
 }
 
 /* Prizes Section */
-.prize-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
+.prize-table-wrapper {
+    max-width: 600px;
+    margin: 0 auto 3rem;
 }
 
-.prize-category {
+.prize-table {
     background: var(--white);
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-.category-title {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-}
-
-.prize-table {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -1637,21 +1625,14 @@ body {
     .objective-grid,
     .info-grid,
     .output-grid,
-    .prize-categories,
     .mention-grid,
     .organizers-grid,
     .collaborations-grid,
-    .categories-grid,
     .resources-grid,
     .stats-grid,
     .rules-highlights,
     .contact-methods {
         grid-template-columns: 1fr;
-    }
-
-    .category-disclaimer {
-        padding: 1rem 1.5rem;
-        font-size: 0.95rem;
     }
 
     .stat-number {
@@ -1705,10 +1686,6 @@ body {
     .criteria-score {
         margin-right: 0;
         margin-bottom: 1rem;
-    }
-
-    .prize-categories {
-        grid-template-columns: 1fr;
     }
 }
 
