@@ -1516,6 +1516,221 @@ body {
     }
 }
 
+/* FAQ Page Styles */
+.faq-hero {
+    background: var(--gradient);
+    padding: 8rem 0 4rem;
+    text-align: center;
+    color: var(--white);
+}
+
+.faq-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.faq-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resources-download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.resource-download-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-download-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.resource-download-card .resource-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.resource-download-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.resource-download-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+}
+
+.faq-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.faq-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.faq-question h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.faq-answer {
+    padding-left: 3.5rem;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.faq-answer ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.faq-answer li {
+    margin-bottom: 0.5rem;
+}
+
+.faq-answer .resource-link {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* FAQ Accordion */
+.faq-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: var(--white);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    padding: 0 2rem 1.5rem;
+}
+
+.accordion-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.accordion-content ul {
+    color: var(--text-light);
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.accordion-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Contact CTA */
+.contact-cta {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.btn-large {
+    padding: 1.25rem 3rem;
+    font-size: 1.2rem;
+}
+
+.contact-email {
+    margin-top: 1.5rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Nav active state */
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .nav-brand span {
@@ -1629,10 +1844,33 @@ body {
     .organizers-grid,
     .collaborations-grid,
     .resources-grid,
+    .resources-download-grid,
+    .faq-grid,
     .stats-grid,
     .rules-highlights,
     .contact-methods {
         grid-template-columns: 1fr;
+    }
+
+    .faq-title {
+        font-size: 2.5rem;
+    }
+
+    .faq-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .faq-answer {
+        padding-left: 0;
+    }
+
+    .accordion-header {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .accordion-item.active .accordion-content {
+        padding: 0 1.5rem 1.5rem;
     }
 
     .stat-number {

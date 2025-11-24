@@ -295,5 +295,31 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// FAQ Accordion functionality
+document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', function() {
+        const accordionItem = this.parentElement;
+        const isActive = accordionItem.classList.contains('active');
+
+        // Close all accordion items
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // Open clicked item if it wasn't already open
+        if (!isActive) {
+            accordionItem.classList.add('active');
+        }
+    });
+});
+
+// Observe FAQ cards for animation
+document.querySelectorAll('.faq-item, .resource-download-card, .accordion-item').forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px)';
+    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(element);
+});
+
 console.log('🚀 Gender Hack website loaded successfully!');
 console.log('💜 Organized by Women in Big Data Italy, IFAB, ICSC & Università del Salento');
