@@ -321,5 +321,241 @@ document.querySelectorAll('.faq-item, .resource-download-card, .accordion-item')
     observer.observe(element);
 });
 
+// Photo Gallery Lightbox
+function createLightbox() {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.innerHTML = `
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption"></div>
+        <div class="lightbox-controls">
+            <button class="lightbox-prev">&#10094;</button>
+            <button class="lightbox-next">&#10095;</button>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxStyle = document.createElement('style');
+    lightboxStyle.textContent = `
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s;
+        }
+
+        #lightbox.active {
+            display: block;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .lightbox-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 50px;
+            font-size: 1.1rem;
+        }
+
+        .lightbox-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            pointer-events: all;
+            cursor: pointer;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s;
+            border: none;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-content {
+                max-width: 95%;
+            }
+
+            .lightbox-prev,
+            .lightbox-next {
+                font-size: 16px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    `;
+    document.head.appendChild(lightboxStyle);
+
+    return lightbox;
+}
+
+// Initialize lightbox
+const lightbox = createLightbox();
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.querySelector('.lightbox-caption');
+const closeBtn = document.querySelector('.lightbox-close');
+const prevBtn = document.querySelector('.lightbox-prev');
+const nextBtn = document.querySelector('.lightbox-next');
+
+let currentImageIndex = 0;
+let galleryImages = [];
+
+// Add click event to all gallery images
+document.addEventListener('DOMContentLoaded', () => {
+    const galleryContainer = document.querySelector('.photo-gallery');
+    if (galleryContainer) {
+        galleryImages = Array.from(galleryContainer.querySelectorAll('img'));
+
+        galleryImages.forEach((img, index) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                currentImageIndex = index;
+                openLightbox(img);
+            });
+        });
+
+        // Add hover effect to gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 8px 24px rgba(139, 92, 246, 0.3)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            });
+        });
+    }
+});
+
+function openLightbox(img) {
+    lightbox.classList.add('active');
+    lightboxImg.src = img.src;
+    lightboxCaption.textContent = img.alt || 'Gender Hack 2025';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentImageIndex].src;
+    lightboxCaption.textContent = galleryImages[currentImageIndex].alt || 'Gender Hack 2025';
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentImageIndex].src;
+    lightboxCaption.textContent = galleryImages[currentImageIndex].alt || 'Gender Hack 2025';
+}
+
+// Event listeners for lightbox
+closeBtn.addEventListener('click', closeLightbox);
+prevBtn.addEventListener('click', showPrevImage);
+nextBtn.addEventListener('click', showNextImage);
+
+// Close lightbox when clicking outside the image
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+        closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+        showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+        showPrevImage();
+    }
+});
+
 console.log('🚀 Gender Hack website loaded successfully!');
 console.log('💜 Organized by Women in Big Data Italy, IFAB, ICSC & Università del Salento');
